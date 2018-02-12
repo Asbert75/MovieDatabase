@@ -7,7 +7,6 @@
 }
 
 .hidden {
-    pointer-events: none;
     display: none;
 }
 
@@ -41,11 +40,6 @@ h1, h2, h3, h4, a, p {
     text-align: center;
 }
 
-.movie:hover {
-    /*transform: scale(1.05);*/
-    cursor: pointer;
-}
-
 .info {
     color: rgb(66, 66, 66);
 }
@@ -74,6 +68,14 @@ h1, h2, h3, h4, a, p {
     position: absolute;
     top: -1em;
     right: 0em;
+    font-size: 1em;
+    color: #e9e9e9;
+}
+
+.edit {
+    position: absolute;
+    top: -1em;
+    right: 6em;
     font-size: 1em;
     color: #e9e9e9;
 }
@@ -197,11 +199,8 @@ h4 {
     text-align: left;
 }
 
-input {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    padding-left: 0.75em;
-    padding-right: 0.75em;
+input[type="text"] {
+    padding: 0.5em 0.75em 0.5em 0.75em;
     width: 15em;
 
     color: #e9e9e9;
@@ -210,7 +209,7 @@ input {
     border-bottom: 2px solid rgba(206, 14, 14, 0.6);
 }
 
-input:focus {
+input[type="text"]:focus {
     outline: none;
 }
 
@@ -235,4 +234,64 @@ label {
     color: green;
     font-size: 0.8em;
     position: absolute;
+}
+
+#searchMovie, #sortBy {
+    pointer-events: none;
+}
+
+.toolbarInput {
+    width: 10em;
+    margin-left: 0.5em;
+    margin-right: 1em;
+}
+
+select {
+    margin-left: 0.5em;
+    padding: 0.5em 0.75em 0.5em 0.75em;
+    color: #e9e9e9;
+    background: rgb(26, 26, 26);
+    border: none;
+    border-bottom: 2px solid rgba(206, 14, 14, 0.6);
+}
+
+select:focus {
+    outline: none;
+}
+
+option {
+    padding: 0.5em 0.75em 0.5em 0.75em;
+    color: #e9e9e9;
+    background: rgb(26, 26, 26);
+}
+
+.editMovie {
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.thumbnailInput {
+    margin-bottom: 1em;
+}
+
+.titleInput {
+    margin-bottom: 1em;
+}
+
+.directorInput {
+    margin-bottom: 1em;
+}
+
+.premiereInput {
+    margin-bottom: 1em;
+}
+
+.submitEdits {
+    margin-top: 2em;
+    display: block;
+}
+
+.cancelEdits {
+    margin-top: 1em;
+    display: block;
 }
