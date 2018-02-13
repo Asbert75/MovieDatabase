@@ -34,6 +34,23 @@ window.onload = function() {
         let data = snapshot.val();
         let key = snapshot.key;
 
+        movies.forEach(function(movie) {
+            if(movie.id == key) {
+                movie.title = data.title;
+                movie.director = data.director;
+                movie.premiere = data.premiere;
+                movie.thumbnail = data.thumbnail;
+            }
+        });
+        results = movies;
+
+        displayMovies(moviesPerPage);
+    });
+
+    db.ref("movies/").on("child_added", function(snapshot) {
+        let data = snapshot.val();
+        let key = snapshot.key;
+
         let movieData = {
             title: data.title,
             director: data.director,
@@ -42,33 +59,13 @@ window.onload = function() {
             id: key,
         };
 
-        let card = document.querySelector("div[data-id='" + key + "'");
-        movies[card.getAttribute("data-loc")] = movieData;
+        movies.push(movieData);
         results = movies;
+
         displayMovies(moviesPerPage);
+        loader.classList.add("hidden");
+        pagination.classList.remove("hidden");
     });
-
-    function getMoviesFromDatabase() {
-        db.ref("movies/").on("child_added", function(snapshot) {
-            let data = snapshot.val();
-            let key = snapshot.key;
-
-            let movieData = {
-                title: data.title,
-                director: data.director,
-                premiere: data.premiere,
-                thumbnail: data.thumbnail,
-                id: key,
-            };
-
-            movies.push(movieData);
-            results = movies;
-
-            displayMovies(moviesPerPage);
-            loader.classList.add("hidden");
-            pagination.classList.remove("hidden");
-        });
-    }
 
     function displayMovies(count) {
         movieList.innerHTML = "";
@@ -85,7 +82,6 @@ window.onload = function() {
         let movie = document.createElement("div");
         movie.classList.add("movie");
         movie.setAttribute("data-id", id);
-        movie.setAttribute("data-loc", loc);
 
         let edit = document.createElement("a");
         edit.classList.add("edit");
@@ -552,6 +548,4 @@ window.onload = function() {
     order.addEventListener("change", function() {
         displayMovies(moviesPerPage);
     });
-
-    getMoviesFromDatabase();
 }
